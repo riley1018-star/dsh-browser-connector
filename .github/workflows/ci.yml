@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Syntax check (JS)
+        run: |
+          find . -name '*.js' -not -path './.git/*' -print0 |
+          while IFS= read -r -d '' f; do
+            node --check "$f" || exit 1
+          done
+
+      - name: Manifest & scripts sanity
+        run: |
+          python3 -c "import json; m=json.load(open('chrome-extension/manifest.json')); assert m['manifest_version']==3; assert 'key' not in m, 'repo manifest must not ship a fixed key'"
+          bash -n install.sh
+          bash -n bridge/host.sh
+
+      - name: Plumbing test (MCP server + bridge, simulated extension)
+        run: node tools/test-plumbing.js

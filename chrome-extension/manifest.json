@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "DSH Browser Connector",
+  "version": "1.0.0",
+  "description": "把 DeepSeek Harness 代理接到这个 Chrome：本地桥接，无云端，仅在 DSH 运行时连接。",
+  "permissions": [
+    "debugger",
+    "tabs",
+    "scripting",
+    "storage",
+    "alarms",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "DSH Browser Connector",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "homepage_url": "https://github.com/13283161018-dotcom/dsh-browser-connector"
+}

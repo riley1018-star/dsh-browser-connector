@@ -1,0 +1,11 @@
+# runtime & secrets — never commit
+keys/
+state/
+state-*/
+bridge/.node-path
+
+# misc
+*.log
+.DS_Store
+node_modules/
+*.bak-*
